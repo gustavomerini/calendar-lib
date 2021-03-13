@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { environment } from 'projects/showcase/src/environments/environment';
-import { WeatherApi } from '../../types/weather-api';
+import { WeatherApi } from '../shared/types/weather-api';
 
 @Injectable({ providedIn: 'root' })
 export class ForecastService {

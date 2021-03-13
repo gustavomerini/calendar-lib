@@ -2,7 +2,10 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  &-header {
+  &-month {
+    color: red;
+  }
+  &-day-title {
     display: grid;
     justify-items: center;
     grid-template-columns: repeat(7, 200px);

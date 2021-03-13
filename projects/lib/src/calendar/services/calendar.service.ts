@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
-import { last } from 'rxjs/operators';
+import { CalendarDay } from '../shared/types/calendar-day';
 
 @Injectable()
 export class CalendarService {
@@ -11,7 +10,7 @@ export class CalendarService {
     return this.generateCalendarByMonth(date.getMonth(), date.getFullYear());
   }
 
-  private generateCalendarByMonth(month: number, year: number = 2021): Date[] {
+  private generateCalendarByMonth(month: number, year: number = 2021): CalendarDay[] {
     const date = new Date(year, month, 1);
     const lastMonthDays = this.getLastMonthDays(date);
     const thisMonthDays = this.getCurrentMonthDays(date);
@@ -19,15 +18,26 @@ export class CalendarService {
     return [...lastMonthDays, ...thisMonthDays, ...nextMonthDays];
   }
 
+  private getDays(startDate: Date, startIndex: number, endIndex: number, isOtherMonth: boolean = true) {
+    let days: CalendarDay[] = [];
+    for (let index = startIndex; index < endIndex; index++) {
+      const day = {
+        id: startDate.toLocaleDateString(),
+        date: new Date(startDate),
+        isToday: startDate.toLocaleDateString() === new Date().toLocaleDateString(),
+        isOtherMonth,
+      }
+      days = [...days, day];
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    return days;
+  }
+
   private getCurrentMonthDays(date: Date) {
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    const lastDay = new Date(date.getFullYear(), date.getMonth() +1, 0);
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     const lastDayNumber = lastDay.getDate();
-    let days: Date[] = [];
-    for (let index = 0; index < lastDayNumber; index++) {
-      days = [...days, new Date(firstDay)];
-      firstDay.setDate(firstDay.getDate() +1);
-    }
+    let days: CalendarDay[] = this.getDays(firstDay, 0, lastDayNumber, false);
     return days;
   }
 
@@ -35,32 +45,21 @@ export class CalendarService {
     const lastMonth = new Date(date);
     const dayOfWeek = date.getDay();
     lastMonth.setDate(0);
-    let days: Date[] = [];
-    for (let index = 0; index < dayOfWeek; index++) {
-      days = [...days, new Date(lastMonth)];
-      lastMonth.setDate(lastMonth.getDate() - 1);
-    }
-    return days.sort((a, b) => this.sortDateAsc(a, b));
-  }
-
-  private sortDateAsc(date1: any, date2: any) {
-    return date1 - date2;
+    lastMonth.setDate(lastMonth.getDate() - dayOfWeek + 1);
+    let days: CalendarDay[] = this.getDays(lastMonth, 0, dayOfWeek);
+    return days;
   }
 
   private getNextMonthDays(date: Date) {
     const nextMonth = new Date(date);
     const lastDayOfWeek = 6; // Saturday
-    const lastDay = new Date(date.getFullYear(), date.getMonth() +1, 0).getDay();
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
     if (lastDay === lastDayOfWeek) {
       return [];
     }
     nextMonth.setMonth(nextMonth.getMonth() + 1);
     const dayOfWeek = nextMonth.getDay();
-    let days: Date[] = [];
-    for (let index = dayOfWeek; index <= lastDayOfWeek; index++) {
-      days = [...days, new Date(nextMonth)];
-      nextMonth.setDate(nextMonth.getDate() + 1);
-    }
+    let days: CalendarDay[] = this.getDays(nextMonth, dayOfWeek, lastDayOfWeek + 1);
     return days;
   }
 
