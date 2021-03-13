@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CalendarDay } from '../shared/types/calendar-day';
+import { daysOfWeek } from '../shared/utils';
 
 @Injectable()
 export class CalendarService {
@@ -25,6 +26,7 @@ export class CalendarService {
         id: startDate.toLocaleDateString(),
         date: new Date(startDate),
         isToday: startDate.toLocaleDateString() === new Date().toLocaleDateString(),
+        isWeekend: daysOfWeek[startDate.getDay()] === 'Saturday' || daysOfWeek[startDate.getDay()] === 'Sunday',
         isOtherMonth,
       }
       days = [...days, day];

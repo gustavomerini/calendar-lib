@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { CalendarDay } from '../shared/types/calendar-day';
+import { daysOfWeek } from '../shared/utils';
 
 import { CalendarService } from './calendar.service';
 
@@ -10,6 +11,7 @@ const calculateExpectedDates = (startDate: Date, expectedIndex: number, isOtherM
       id: startDate.toLocaleDateString(),
       date: new Date(startDate),
       isToday: startDate.toLocaleDateString() === new Date().toLocaleDateString(),
+      isWeekend: daysOfWeek[startDate.getDay()] === 'Saturday' || daysOfWeek[startDate.getDay()] === 'Sunday',
       isOtherMonth
     }
     expectedDates = [...expectedDates, day];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarDay } from './shared/types/calendar-day';
 import { CalendarService } from './services/calendar.service';
+import { daysOfWeek, monthNames } from './shared/utils';
 
 @Component({
   selector: 'calendar-lib',
@@ -10,12 +11,10 @@ import { CalendarService } from './services/calendar.service';
 export class CalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = [];
-  public today: Date = new Date;
+  public today: Date = new Date();
   public month: string = '';
-  public daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  private monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
+  public daysOfWeek = daysOfWeek;
+  private monthNames = monthNames;
 
   constructor(private calendarService: CalendarService) { }
 
