@@ -20,12 +20,13 @@ export class CalendarService {
   }
 
   private getCurrentMonthDays(date: Date) {
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDay = new Date(date.getFullYear(), date.getMonth() +1, 0);
-    const lastDayNumber = lastDay.getDay();
+    const lastDayNumber = lastDay.getDate();
     let days: Date[] = [];
     for (let index = 0; index < lastDayNumber; index++) {
-      days = [...days, new Date(lastDay)];
-      lastDay.setDate(lastDay.getDate() +1);
+      days = [...days, new Date(firstDay)];
+      firstDay.setDate(firstDay.getDate() +1);
     }
     return days;
   }
@@ -39,20 +40,24 @@ export class CalendarService {
       days = [...days, new Date(lastMonth)];
       lastMonth.setDate(lastMonth.getDate() - 1);
     }
-    return days;
+    return days.sort((a, b) => this.sortDateAsc(a, b));
+  }
+
+  private sortDateAsc(date1: any, date2: any) {
+    return date1 - date2;
   }
 
   private getNextMonthDays(date: Date) {
     const nextMonth = new Date(date);
     const lastDayOfWeek = 6; // Saturday
-    if (nextMonth.getDay() === lastDayOfWeek) {
+    const lastDay = new Date(date.getFullYear(), date.getMonth() +1, 0).getDay();
+    if (lastDay === lastDayOfWeek) {
       return [];
     }
     nextMonth.setMonth(nextMonth.getMonth() + 1);
     const dayOfWeek = nextMonth.getDay();
     let days: Date[] = [];
-    console.log(dayOfWeek);
-    for (let index = dayOfWeek; lastDayOfWeek >= index; index++) {
+    for (let index = dayOfWeek; index <= lastDayOfWeek; index++) {
       days = [...days, new Date(nextMonth)];
       nextMonth.setDate(nextMonth.getDate() + 1);
     }
