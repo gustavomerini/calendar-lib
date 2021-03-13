@@ -7,8 +7,8 @@ export class CalendarService {
 
   constructor() { }
 
-  public getCalendar(): any {
-    return this.generateCalendarByMonth(8);
+  public getCalendar(date: Date): any {
+    return this.generateCalendarByMonth(date.getMonth(), date.getFullYear());
   }
 
   private generateCalendarByMonth(month: number, year: number = 2021): Date[] {

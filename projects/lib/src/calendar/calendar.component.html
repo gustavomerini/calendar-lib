@@ -1,3 +1,11 @@
-<p>
-  lib works!
-</p>
+<div class="calendar">
+  <div class="calendar-header">
+    <span *ngFor="let d of daysOfWeek">
+      {{d}}
+    </span>
+  </div>
+  <div class="calendar-day">
+    <app-calendar-day *ngFor="let day of calendar" [day]="day">
+    </app-calendar-day>
+  </div>
+</div>

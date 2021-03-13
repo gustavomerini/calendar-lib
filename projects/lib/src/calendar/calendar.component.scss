@@ -1,0 +1,14 @@
+.calendar {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  &-header {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(7, 200px);
+  }
+  &-day {
+    display: grid;
+    grid-template-columns: repeat(7, 200px);
+  }
+}
