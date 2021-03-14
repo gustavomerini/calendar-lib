@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CalendarDay } from '../shared/types/calendar-day';
-import { daysOfWeek } from '../shared/utils';
+import { CalendarDay } from '../../shared/types/calendar-day';
+import { daysOfWeek } from '../../shared/utils';
 
 import { CalendarService } from './calendar.service';
 

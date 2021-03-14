@@ -5,7 +5,7 @@ import { CalendarComponent } from './calendar.component';
 import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { CalendarService } from './services/calendar.service';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ForecastService } from './services/forecast.service';

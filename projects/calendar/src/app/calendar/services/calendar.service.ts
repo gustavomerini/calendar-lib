@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CalendarDay } from '../shared/types/calendar-day';
-import { daysOfWeek } from '../shared/utils';
+import { CalendarDay } from '../../shared/types/calendar-day';
+import { daysOfWeek } from '../../shared/utils';
 
 @Injectable()
 export class CalendarService {

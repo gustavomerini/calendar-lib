@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CalendarDay } from '../../shared/types/calendar-day';
+import { CalendarDay } from '../../../shared/types/calendar-day';
 
 @Component({
   selector: 'app-calendar-day',

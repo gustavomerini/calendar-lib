@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { WeatherApi } from '../shared/types/weather-api';
-import { weatherApi } from '../shared/utils';
+import { WeatherApi } from '../../shared/types/weather-api';
+import { weatherApi } from '../../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ForecastService {

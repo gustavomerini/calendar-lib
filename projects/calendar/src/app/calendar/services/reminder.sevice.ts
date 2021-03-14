@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Reminder } from '../shared/types/reminder';
+import { Reminder } from '../../shared/types/reminder';
 
 @Injectable({ providedIn: 'root' })
 export class ReminderService {

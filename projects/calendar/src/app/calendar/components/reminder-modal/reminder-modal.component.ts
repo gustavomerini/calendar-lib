@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ForecastService } from '../../services/forecast.service';
-import { CalendarDay } from '../../shared/types/calendar-day';
-import { Reminder } from '../../shared/types/reminder';
+import { CalendarDay } from '../../../shared/types/calendar-day';
+import { Reminder } from '../../../shared/types/reminder';
 
 export interface DialogData {
   day: CalendarDay;

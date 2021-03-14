@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import { Reminder } from "../shared/types/reminder";
+import { Reminder } from "../../shared/types/reminder";
 import { ReminderService } from "./reminder.sevice";
 
 describe('ReminderService', () => {

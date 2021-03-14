@@ -7,7 +7,7 @@ import { CalendarDayComponent } from './components/calendar-day/calendar-day.com
 import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { CalendarService } from './services/calendar.service';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;

@@ -6,72 +6,32 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lib": {
-      "projectType": "library",
-      "root": "projects/lib",
-      "sourceRoot": "projects/lib/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/lib/tsconfig.lib.json",
-            "project": "projects/lib/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/lib/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/lib/src/test.ts",
-            "tsConfig": "projects/lib/tsconfig.spec.json",
-            "karmaConfig": "projects/lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/lib/tsconfig.lib.json",
-              "projects/lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "showcase": {
+    "calendar": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/showcase",
-      "sourceRoot": "projects/showcase/src",
+      "root": "projects/calendar",
+      "sourceRoot": "projects/calendar/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/showcase",
-            "index": "projects/showcase/src/index.html",
-            "main": "projects/showcase/src/main.ts",
-            "polyfills": "projects/showcase/src/polyfills.ts",
-            "tsConfig": "projects/showcase/tsconfig.app.json",
+            "outputPath": "dist/calendar",
+            "index": "projects/calendar/src/index.html",
+            "main": "projects/calendar/src/main.ts",
+            "polyfills": "projects/calendar/src/polyfills.ts",
+            "tsConfig": "projects/calendar/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/showcase/src/favicon.ico",
-              "projects/showcase/src/assets"
+              "projects/calendar/src/favicon.ico",
+              "projects/calendar/src/assets"
             ],
             "styles": [
-              "projects/showcase/src/styles.scss"
+              "projects/calendar/src/styles.scss"
             ],
             "scripts": []
           },
@@ -79,8 +39,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/showcase/src/environments/environment.ts",
-                  "with": "projects/showcase/src/environments/environment.prod.ts"
+                  "replace": "projects/calendar/src/environments/environment.ts",
+                  "with": "projects/calendar/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -108,33 +68,33 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "showcase:build"
+            "browserTarget": "calendar:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "showcase:build:production"
+              "browserTarget": "calendar:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "showcase:build"
+            "browserTarget": "calendar:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/showcase/src/test.ts",
-            "polyfills": "projects/showcase/src/polyfills.ts",
-            "tsConfig": "projects/showcase/tsconfig.spec.json",
-            "karmaConfig": "projects/showcase/karma.conf.js",
+            "main": "projects/calendar/src/test.ts",
+            "polyfills": "projects/calendar/src/polyfills.ts",
+            "tsConfig": "projects/calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/calendar/karma.conf.js",
             "assets": [
-              "projects/showcase/src/favicon.ico",
-              "projects/showcase/src/assets"
+              "projects/calendar/src/favicon.ico",
+              "projects/calendar/src/assets"
             ],
             "styles": [
-              "projects/showcase/src/styles.scss"
+              "projects/calendar/src/styles.scss"
             ],
             "scripts": []
           }
@@ -143,9 +103,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/showcase/tsconfig.app.json",
-              "projects/showcase/tsconfig.spec.json",
-              "projects/showcase/e2e/tsconfig.json"
+              "projects/calendar/tsconfig.app.json",
+              "projects/calendar/tsconfig.spec.json",
+              "projects/calendar/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -155,12 +115,12 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/showcase/e2e/protractor.conf.js",
-            "devServerTarget": "showcase:serve"
+            "protractorConfig": "projects/calendar/e2e/protractor.conf.js",
+            "devServerTarget": "calendar:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "showcase:serve:production"
+              "devServerTarget": "calendar:serve:production"
             }
           }
         }

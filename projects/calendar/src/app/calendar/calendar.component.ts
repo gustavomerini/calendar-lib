@@ -1,10 +1,10 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { CalendarDay } from './shared/types/calendar-day';
+import { CalendarDay } from '../shared/types/calendar-day';
 import { CalendarService } from './services/calendar.service';
-import { daysOfWeek, monthNames, sortByDateAdc } from './shared/utils';
+import { daysOfWeek, monthNames, sortByDateAdc } from '../shared/utils';
 import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
 import { ReminderService } from './services/reminder.sevice';
-import { Reminder } from './shared/types/reminder';
+import { Reminder } from '../shared/types/reminder';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDatepicker } from '@angular/material/datepicker';
 

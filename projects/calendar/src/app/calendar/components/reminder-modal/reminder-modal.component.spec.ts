@@ -3,8 +3,8 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ForecastService } from '../../services/forecast.service';
-import { SharedModule } from '../../shared/shared.module';
-import { Reminder } from '../../shared/types/reminder';
+import { SharedModule } from '../../../shared/shared.module';
+import { Reminder } from '../../../shared/types/reminder';
 
 import { ReminderModalComponent } from './reminder-modal.component';
 
