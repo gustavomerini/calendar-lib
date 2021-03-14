@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Reminder } from '../shared/types/reminder';
 
 @Injectable({ providedIn: 'root' })
 export class ReminderService {
-  private reminders: Reminder[] = []
+  public reminders: Reminder[] = []
+  public remindersChange: Subject<Reminder[]> = new Subject<Reminder[]>();
 
-  constructor() { }
+  constructor() {}
 
   public addReminder(reminder: Reminder) {
     this.reminders = [...this.reminders, reminder];
+    this.remindersChange.next(this.reminders);
   }
 
   public removeReminder(id: string) {
     this.reminders = this.reminders.filter(r => r.id !== id);
+    this.remindersChange.next(this.reminders);
   }
 
-  public getReminders() {
-    return this.reminders;
+  public removeAllReminders() {
+    this.reminders = []
+    this.remindersChange.next(this.reminders);
   }
 
 }

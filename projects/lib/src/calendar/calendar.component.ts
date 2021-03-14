@@ -18,18 +18,22 @@ export class CalendarComponent implements OnInit {
   public today: Date = new Date('2021-05-02');
   public selectedDay: CalendarDay = { id: '', date: new Date() };
   public month: string = '';
+  public reminders: Reminder[] = [];
   public daysOfWeek = daysOfWeek;
   private monthNames = monthNames;
-
   constructor(private calendarService: CalendarService, private reminderService: ReminderService, public dialog: MatDialog) { }
 
   public ngOnInit(): void {
     this.calendar = this.calendarService.getCalendar(this.today);
     this.month = this.monthNames[this.calendar[10].date.getMonth()];
+    this.reminderService.remindersChange.subscribe((reminders) => {
+      this.reminders = reminders;
+    })
   }
 
   public onSelectDay(day: CalendarDay) {
     if (day.id === this.selectedDay.id) {
+      console.log(day.id, this.selectedDay.id)
       this.onCreateReminder(day);
       return;
     }
@@ -51,6 +55,10 @@ export class CalendarComponent implements OnInit {
         this.reminderService.addReminder(reminder);
       }
     });
+  }
+
+  public deleteAllReminders() {
+    this.reminderService.removeAllReminders();
   }
 
 }

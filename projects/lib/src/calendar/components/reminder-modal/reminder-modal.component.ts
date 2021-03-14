@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarDay } from '../../shared/types/calendar-day';
+import { Reminder } from '../../shared/types/reminder';
 
 export interface DialogData {
   day: CalendarDay;
@@ -16,6 +17,8 @@ export interface DialogData {
 export class ReminderModalComponent implements OnInit {
 
   public reminderForm: FormGroup = new FormGroup({});
+  public backgroundColor: string = '#3f51b5';
+  public show = false;
 
   constructor(public dialogRef: MatDialogRef<ReminderModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -30,21 +33,40 @@ export class ReminderModalComponent implements OnInit {
   private initForm() {
     this.reminderForm = this.fb.group({
       date: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      time: ['', [Validators.required]],
+      title: ['', [Validators.required]],
       city: ['', [Validators.required]],
       color: ['#3F51B5'],
     });
     this.reminderForm.patchValue(this.data.day);
   }
 
+  public setColor(color: string) {
+    this.backgroundColor = color;
+    this.reminderForm.controls.color.setValue(color);
+    this.show = false;
+  }
+
 
   public onCreate() {
-    if (this.reminderForm.invalid) return;
-    this.dialogRef.close(this.reminderForm.value);
+    if (this.reminderForm.invalid) {
+      this.reminderForm.markAllAsTouched();
+      return;
+    };
+    const formValue = this.reminderForm.value;
+    const reminder: Reminder = {
+      ...formValue,
+      date: formValue.date.toLocaleDateString(),
+      id: formValue.date.toLocaleString()
+
+    }
+    this.dialogRef.close(reminder);
   }
 
   public onCancel() {
     this.dialogRef.close(null);
-  }  
+  }
+
+  public toggleColors(): void {
+    this.show = !this.show;
+  }
 }

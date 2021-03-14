@@ -15,9 +15,8 @@ import { ReminderModalComponent } from './components/reminder-modal/reminder-mod
   declarations: [CalendarComponent, CalendarDayComponent, ReminderComponent, ReminderModalComponent],
   providers: [
     CalendarService,
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
-  imports: [CommonModule, BrowserAnimationsModule, SharedModule, ReactiveFormsModule],
+  imports: [CommonModule, BrowserAnimationsModule, SharedModule],
   exports: [CalendarComponent]
 })
 export class CalendarModule { }

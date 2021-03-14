@@ -1,0 +1,7 @@
+<div class="tooltip right">
+  <div class="arrow"></div>
+  <div class="colors">
+    <div (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle"
+      [ngStyle]="{'background': paint}"></div>
+  </div>
+</div>

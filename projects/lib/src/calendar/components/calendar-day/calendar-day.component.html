@@ -1,3 +1,4 @@
 <div class="day" (click)="onSelectDay.emit(day)">
   <div class="day-header">{{day.date.getDate()}}</div>
+  <div class="reminder" **ngFor="let reminder of day.reminders">{{day.date.getDate()}}</div>
 </div>

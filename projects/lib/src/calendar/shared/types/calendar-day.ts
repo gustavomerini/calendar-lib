@@ -1,3 +1,5 @@
+import { Reminder } from "./reminder";
+
 export interface CalendarDay {
   id: string;
   date: Date;
@@ -5,4 +7,5 @@ export interface CalendarDay {
   isToday?: boolean;
   isOtherMonth?: boolean;
   isActive?: boolean;
+  reminders?: Reminder[];
 }

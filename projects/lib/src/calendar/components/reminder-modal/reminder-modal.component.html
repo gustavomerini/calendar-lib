@@ -1,21 +1,26 @@
 <div>
   <form [formGroup]="reminderForm">
     <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
-      <input matInput formControlName="date">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
+      <div class="circle" matSuffix (click)="toggleColors()" [ngStyle]="{'background': backgroundColor}"></div>
       <mat-label>Title</mat-label>
-      <input matInput formControlName="name">
+      <input matInput formControlName="title">
+      <mat-error *ngIf="reminderForm.controls.title.errors?.required">Title is required</mat-error>
+    </mat-form-field>
+    <app-color-picker *ngIf="show" [color]="backgroundColor" (event)="setColor($event)"></app-color-picker>
+    <mat-form-field appearance="fill">
+      <mat-label>Date and Time</mat-label>
+      <mat-datetimepicker-toggle [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
+      <mat-datetimepicker #datetimePicker type="datetime" [timeInterval]="5">
+      </mat-datetimepicker>
+      <input matInput formControlName="date" [matDatetimepicker]="datetimePicker" autocomplete="false">
+      <mat-error *ngIf="reminderForm.controls.date.errors?.matDatepickerParse">Invalid Date and Time</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>City</mat-label>
       <input matInput formControlName="city">
+      <mat-error *ngIf="reminderForm.controls.city.errors?.required">City is required</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Color</mat-label>
-      <input matInput formControlName="color">
-    </mat-form-field>
+  {{reminderForm.value.date | json}}
   </form>
   <div mat-dialog-actions>
     <button mat-button (click)="onCancel()">Cancel</button>

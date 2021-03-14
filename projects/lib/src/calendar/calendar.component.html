@@ -8,6 +8,8 @@
   <div class="sidenav">
     <button mat-flat-button color="primary" (click)="onCreateReminder(selectedDay)"> Add
       Event </button>
+    <button mat-flat-button color="primary" (click)="deleteAllReminders()"> Delete all reminders </button>
+    {{ reminders | json }}
   </div>
   <div class="toolbar">
     <mat-toolbar>
@@ -16,6 +18,7 @@
           {{month}} {{today.getFullYear()}}
         </span>
       </div>
+      {{selectedDay | json}}
     </mat-toolbar>
   </div>
   <div class="calendar">

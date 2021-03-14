@@ -7,7 +7,7 @@ import { CalendarDay } from '../../shared/types/calendar-day';
   styleUrls: ['./calendar-day.component.scss']
 })
 export class CalendarDayComponent implements OnInit {
-  @Input() day: CalendarDay = { id: '', date: new Date()};
+  @Input() day: CalendarDay = { id: '', date: new Date(), reminders: []};
   @Output() onSelectDay = new EventEmitter();
 
   constructor() { }

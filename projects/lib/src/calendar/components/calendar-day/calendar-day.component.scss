@@ -1,6 +1,6 @@
 .day {
   position: relative;
-  height: 8.50em;
+  height: 8.20em;
   background-color: transparent;
   border: 1px solid #EDEBE9;
   &-header {
@@ -9,4 +9,13 @@
     margin-left: 5px;
     margin-top: 5px;
   }
+}
+
+.grey {
+  background-color: #FAF9F8;
+  color: #106ebe;
+}
+
+.other-month {
+  color: #AFAFAF;
 }
