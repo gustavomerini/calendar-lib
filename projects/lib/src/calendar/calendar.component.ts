@@ -11,7 +11,7 @@ import { daysOfWeek, monthNames } from './shared/utils';
 export class CalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = [];
-  public today: Date = new Date();
+  public today: Date = new Date('2021-05-02');
   public month: string = '';
   public daysOfWeek = daysOfWeek;
   private monthNames = monthNames;

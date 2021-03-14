@@ -1,4 +1,4 @@
-export interface Event {
+export interface Reminder {
   title: string;
   id: string;
   city: string;
