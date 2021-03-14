@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { CalendarDay } from './shared/types/calendar-day';
 import { CalendarService } from './services/calendar.service';
 import { daysOfWeek, monthNames, sortByDateAdc } from './shared/utils';
@@ -6,6 +6,7 @@ import { ReminderModalComponent } from './components/reminder-modal/reminder-mod
 import { ReminderService } from './services/reminder.sevice';
 import { Reminder } from './shared/types/reminder';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'calendar-lib',
@@ -16,7 +17,7 @@ export class CalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = [];
   public mapCalendar: any = {}
-  public today: Date = new Date('2021-05-02');
+  public startDate: Date = new Date();
   public selectedDay: CalendarDay = { id: '', date: new Date() };
   public month: string = '';
   public reminders: Reminder[] = [];
@@ -25,7 +26,7 @@ export class CalendarComponent implements OnInit {
   constructor(private calendarService: CalendarService, private reminderService: ReminderService, public dialog: MatDialog) { }
 
   public ngOnInit(): void {
-    this.calendar = this.calendarService.getCalendar(this.today);
+    this.calendar = this.calendarService.getCalendar(this.startDate);
     this.reminders = this.reminderService.reminders;
     this.month = this.monthNames[this.calendar[10].date.getMonth()];
     this.reminderService.remindersChange.subscribe((reminders) => {
@@ -87,6 +88,13 @@ export class CalendarComponent implements OnInit {
     this.mapDeleteReminders();
     this.reminderService.removeAllReminders();
   }
+
+  chosenMonthHandler(date: any, datepicker: MatDatepicker<Date>) {
+    this.startDate = date;
+    this.calendar = this.calendarService.getCalendar(this.startDate);
+    this.mapReminders();
+    datepicker.close();
+  }  
 
   private mapReminders() {
     this.mapCalendar = this.calendar.reduce((acc, item) => acc.set(item.id, item), new Map());

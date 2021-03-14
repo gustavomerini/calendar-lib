@@ -2,7 +2,7 @@
   display: grid;
   height: 100%;
   grid-template-columns: 15% 70% 15%;
-  grid-template-rows: 50px auto 50px;
+  grid-template-rows: 50px auto 10px;
   grid-template-areas:
     "nav     nav         nav"
     "sidenav toolbar toolbar"
@@ -19,10 +19,14 @@
   }
   & .toolbar {
     grid-area: toolbar;
+    display: grid;
     width: 100%;
-    height: 100%;
+    align-self: start;
     & .current-date {
       margin-left: 10px;
+    }
+    & .calendar-button:hover {
+      background: lightgray;
     }
   }
   & .sidenav {
@@ -54,6 +58,7 @@
   }
   & .calendar {
     grid-area: content;
+    height: 100%;
     &-title {
       display: grid;
       justify-items: center;
