@@ -16,8 +16,10 @@
         {{selectedDay.date | dateFormat: 'dddd, MMMM Do'}}
       </span>
       <div class="reminder" *ngFor="let r of selectedDay.reminders" [ngStyle]="{'border-left': '8px solid' + r.color}">
-        <span>{{r.title}}</span>
-        <span>{{r.city}}</span>
+        <span class="time">{{r.dateTime | dateFormat: 'h:mm a'}}</span>
+        <span class="title" [matTooltip]="r.title">{{r.title}}</span>
+        <span class="city">{{r.city}}</span>
+        <img *ngIf="r.forecast" class="forecast" [src]="'assets/icons/' + r.forecast + '.png'" />
       </div>
     </div>
   </div>
@@ -33,7 +35,7 @@
       </button>
       <div class="current-date">
         <span>
-          {{startDate | dateFormat: 'MMMM, YYYY'}} 
+          {{startDate | dateFormat: 'MMMM, YYYY'}}
         </span>
       </div>
     </mat-toolbar>

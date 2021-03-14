@@ -21,10 +21,13 @@
       <input matInput formControlName="city">
       <mat-error *ngIf="reminderForm.controls.city.errors?.required">City is required</mat-error>
     </mat-form-field>
-  {{reminderForm.value.date | json}}
+    {{reminderForm.value.date | json}}
   </form>
   <div mat-dialog-actions class="actions">
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="onCreate()">{{ data.edit ? 'Save' : 'Create'}}</button>
+    <button mat-flat-button color="primary" (click)="onCreate()">
+      <span *ngIf="loading" class="loading"></span>
+      <span *ngIf="!loading">{{ data.edit ? 'Save' : 'Create'}}</span>
+    </button>
   </div>
 </div>

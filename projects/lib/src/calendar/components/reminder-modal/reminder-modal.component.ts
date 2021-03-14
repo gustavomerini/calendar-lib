@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { ForecastService } from '../../services/forecast.service';
 import { CalendarDay } from '../../shared/types/calendar-day';
 import { Reminder } from '../../shared/types/reminder';
 
@@ -21,11 +22,13 @@ export class ReminderModalComponent implements OnInit {
   public reminderForm: FormGroup = new FormGroup({});
   public backgroundColor: string = '#3f51b5';
   public show = false;
+  public loading = false;
 
   constructor(public dialogRef: MatDialogRef<ReminderModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private forecastService: ForecastService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,7 @@ export class ReminderModalComponent implements OnInit {
       city: ['', [Validators.required]],
       color: ['#3F51B5'],
     });
-    this.data.edit ? this.reminderForm.patchValue(this.data.reminder) : this.reminderForm.patchValue({...this.data.day, dateTime: this.data.day.date});
+    this.data.edit ? this.reminderForm.patchValue(this.data.reminder) : this.reminderForm.patchValue({ ...this.data.day, dateTime: this.data.day.date });
   }
 
   public setColor(color: string) {
@@ -54,16 +57,21 @@ export class ReminderModalComponent implements OnInit {
       this.reminderForm.markAllAsTouched();
       return;
     };
+    this.loading = true;
     const formValue = this.reminderForm.value;
-    debugger
     const reminder: Reminder = {
       ...formValue,
       dateTime: formValue.dateTime,
       date: formValue.dateTime.toLocaleDateString(),
       id: formValue.dateTime.toLocaleString()
-
     }
-    this.dialogRef.close(reminder);
+    this.forecastService.forecast(reminder.city, reminder.dateTime).subscribe((response) => {
+      reminder.forecast = response.weather;
+      this.dialogRef.close(reminder);
+    },
+      err => {
+        this.dialogRef.close(reminder);
+      })
   }
 
   public onCancel() {

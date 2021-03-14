@@ -3,11 +3,22 @@
   height: 8.2em;
   background-color: transparent;
   border: 1px solid #edebe9;
-  &-header {
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-left: 5px;
-    margin-top: 5px;
+  & .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    & .forecast {
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+    & .header {
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
   }
   & .reminder {
     cursor: pointer;

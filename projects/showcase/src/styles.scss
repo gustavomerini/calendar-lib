@@ -1,4 +1,4 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
   font-family: "Open Sans", sans-serif;
@@ -20,6 +20,21 @@ mat-form-field {
   background: white;
 }
 
-.clickable {
-  cursor: pointer;
+.loading {
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  border: 1px solid rgb(58, 58, 58);
+  border-radius: 50%;
+  border-top-color: rgb(233, 233, 233);
+  animation: loading 1s infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 }

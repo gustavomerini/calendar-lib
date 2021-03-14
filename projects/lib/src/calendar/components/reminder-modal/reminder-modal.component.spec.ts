@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ForecastService } from '../../services/forecast.service';
 import { SharedModule } from '../../shared/shared.module';
 import { Reminder } from '../../shared/types/reminder';
 
@@ -27,6 +28,7 @@ describe('ReminderModalComponent', () => {
       providers: [
         MatDialog,
         FormBuilder,
+        ForecastService,
         {
           provide: MAT_DIALOG_DATA,
           useValue: model
@@ -66,7 +68,7 @@ describe('ReminderModalComponent', () => {
       color: 'test',
       date: '1',
       forecast: '02d',
-      dateTime: 'test',
+      dateTime: new Date(),
       title: 'thistitlehastohastohastohastohastohasmorethan30characteres'
     }
     component.reminderForm.patchValue(reminder);
@@ -82,7 +84,7 @@ describe('ReminderModalComponent', () => {
       color: 'test',
       date: '1',
       forecast: '02d',
-      dateTime: 'test',
+      dateTime: new Date(),
       title: 'party'
     }
     component.reminderForm.patchValue(reminder);

@@ -18,7 +18,7 @@ export class CalendarComponent implements OnInit {
   public calendar: CalendarDay[] = [];
   public mapCalendar: any = {}
   public startDate: Date = new Date();
-  public selectedDay: CalendarDay = { id: '', date: new Date() };
+  public selectedDay: CalendarDay = { id: '', date: new Date(), reminders: [] };
   public month: string = '';
   public reminders: Reminder[] = [];
   public daysOfWeek = daysOfWeek;
@@ -37,7 +37,6 @@ export class CalendarComponent implements OnInit {
 
   public onSelectDay(day: CalendarDay) {
     if (day.id === this.selectedDay.id) {
-      console.log(day.id, this.selectedDay.id)
       this.onCreateReminder(day);
       return;
     }
@@ -94,7 +93,7 @@ export class CalendarComponent implements OnInit {
     this.calendar = this.calendarService.getCalendar(this.startDate);
     this.mapReminders();
     datepicker.close();
-  }  
+  }
 
   private mapReminders() {
     this.mapCalendar = this.calendar.reduce((acc, item) => acc.set(item.id, item), new Map());
