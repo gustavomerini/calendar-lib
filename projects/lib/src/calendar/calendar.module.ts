@@ -10,13 +10,14 @@ import { ReminderComponent } from './components/reminder/reminder.component';
 import { CalendarService } from './services/calendar.service';
 import { SharedModule } from './shared/shared.module';
 import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [CalendarComponent, CalendarDayComponent, ReminderComponent, ReminderModalComponent],
   providers: [
     CalendarService,
   ],
-  imports: [CommonModule, BrowserAnimationsModule, SharedModule],
+  imports: [BrowserModule, BrowserAnimationsModule, SharedModule],
   exports: [CalendarComponent]
 })
 export class CalendarModule { }

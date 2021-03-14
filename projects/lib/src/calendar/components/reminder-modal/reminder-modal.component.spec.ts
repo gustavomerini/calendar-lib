@@ -59,14 +59,30 @@ describe('ReminderModalComponent', () => {
     expect(component.reminderForm.markAllAsTouched).toHaveBeenCalled();
   });
 
+  it('should create reminder - title with length > 30', () => {
+    const reminder: Reminder = {
+      id: '1',
+      city: 'test',
+      color: 'test',
+      date: '1',
+      forecast: '02d',
+      dateTime: 'test',
+      title: 'thistitlehastohastohastohastohastohasmorethan30characteres'
+    }
+    component.reminderForm.patchValue(reminder);
+    spyOn(component.reminderForm, 'markAllAsTouched').and.callThrough();
+    component.onCreate();
+    expect(component.reminderForm.markAllAsTouched).toHaveBeenCalled();
+  });  
+
   it('should create reminder', () => {
     const reminder: Reminder = {
       id: '1',
       city: 'test',
       color: 'test',
-      date: new Date(),
+      date: '1',
       forecast: '02d',
-      hour: 'test',
+      dateTime: 'test',
       title: 'party'
     }
     component.reminderForm.patchValue(reminder);

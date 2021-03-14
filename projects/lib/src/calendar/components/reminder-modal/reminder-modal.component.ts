@@ -7,6 +7,8 @@ import { Reminder } from '../../shared/types/reminder';
 
 export interface DialogData {
   day: CalendarDay;
+  reminder: Reminder;
+  edit: boolean;
 }
 
 @Component({
@@ -32,12 +34,12 @@ export class ReminderModalComponent implements OnInit {
 
   private initForm() {
     this.reminderForm = this.fb.group({
-      date: ['', [Validators.required]],
-      title: ['', [Validators.required]],
+      dateTime: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.maxLength(30)]],
       city: ['', [Validators.required]],
       color: ['#3F51B5'],
     });
-    this.reminderForm.patchValue(this.data.day);
+    this.data.edit ? this.reminderForm.patchValue(this.data.reminder) : this.reminderForm.patchValue({...this.data.day, dateTime: this.data.day.date});
   }
 
   public setColor(color: string) {
@@ -53,10 +55,12 @@ export class ReminderModalComponent implements OnInit {
       return;
     };
     const formValue = this.reminderForm.value;
+    debugger
     const reminder: Reminder = {
       ...formValue,
-      date: formValue.date.toLocaleDateString(),
-      id: formValue.date.toLocaleString()
+      dateTime: formValue.dateTime,
+      date: formValue.dateTime.toLocaleDateString(),
+      id: formValue.dateTime.toLocaleString()
 
     }
     this.dialogRef.close(reminder);

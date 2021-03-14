@@ -6,10 +6,20 @@
     </mat-toolbar>
   </div>
   <div class="sidenav">
-    <button mat-flat-button color="primary" (click)="onCreateReminder(selectedDay)"> Add
-      Event </button>
-    <button mat-flat-button color="primary" (click)="deleteAllReminders()"> Delete all reminders </button>
-    {{ reminders | json }}
+    <div class="actions">
+      <button mat-flat-button color="primary" (click)="onCreateReminder(selectedDay)"> Add
+        Event </button>
+      <button mat-flat-button color="primary" (click)="deleteAllReminders()"> Delete all reminders </button>
+    </div>
+    <div class="selected-day">
+      <span>
+        {{selectedDay.date | dateFormat: 'dddd, MMMM Do'}}
+      </span>
+      <div class="reminder" *ngFor="let r of selectedDay.reminders" [ngStyle]="{'border-left': '8px solid' + r.color}">
+        <span>{{r.title}}</span>
+        <span>{{r.city}}</span>
+      </div>
+    </div>
   </div>
   <div class="toolbar">
     <mat-toolbar>
@@ -18,7 +28,6 @@
           {{month}} {{today.getFullYear()}}
         </span>
       </div>
-      {{selectedDay | json}}
     </mat-toolbar>
   </div>
   <div class="calendar">
@@ -30,7 +39,7 @@
     <div class="calendar-days">
       <div class="calendar-day" *ngFor="let day of calendar"
         [ngClass]="{clicked: day.isActive, 'other-month': day.isOtherMonth, grey: day.isWeekend}">
-        <app-calendar-day [day]="day" (onSelectDay)="onSelectDay($event)">
+        <app-calendar-day [day]="day" (onSelectDay)="onSelectDay($event)" (onEditReminder)="onEditReminder($event)">
         </app-calendar-day>
       </div>
     </div>

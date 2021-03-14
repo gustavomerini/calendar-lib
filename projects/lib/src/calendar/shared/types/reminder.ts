@@ -3,7 +3,7 @@ export interface Reminder {
   color: string;
   id: string;
   city: string;
-  hour: string;
-  date: Date;
-  forecast: string,
+  date: string;
+  forecast?: string,
+  dateTime?: string;
 }

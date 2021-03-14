@@ -2,3 +2,7 @@ export const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday
 export const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
+
+export const sortByDateAdc = (a: any, b: any) => {
+    return a - b;
+}

@@ -1,0 +1,17 @@
+.circle {
+  $size: 15px;
+  height: $size;
+  width: $size;
+  box-sizing: border-box;
+  border-radius: 100%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.actions {
+  float: right;
+}
+
+mat-form-field {
+  line-height: 1.2em !important;
+}

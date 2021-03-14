@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ColorPickerComponent } from './components/color-picker.component';
 import { CommonModule } from '@angular/common';
+import { MomentPipe } from './pipes/moment-pipe';
 
 @NgModule({
   imports: [
@@ -42,9 +43,10 @@ import { CommonModule } from '@angular/common';
     MatDatepickerModule,
     MatNativeDatetimeModule,
     MatDatetimepickerModule,
-    ColorPickerComponent
+    ColorPickerComponent,
+    MomentPipe
   ],
-  declarations: [ColorPickerComponent],
+  declarations: [ColorPickerComponent, MomentPipe],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-US' },],
 })
 export class SharedModule { }

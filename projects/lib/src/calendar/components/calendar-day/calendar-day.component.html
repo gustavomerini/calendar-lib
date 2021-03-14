@@ -1,4 +1,22 @@
 <div class="day" (click)="onSelectDay.emit(day)">
   <div class="day-header">{{day.date.getDate()}}</div>
-  <div class="reminder" **ngFor="let reminder of day.reminders">{{day.date.getDate()}}</div>
+
+  <div class="reminder" *ngFor="let reminder of day.reminders?.slice(0, 4)"
+    (click)="onEditReminder.emit({reminder: reminder, event: $event})">
+    <div class="title-wrapper">
+      <div class="circle" [ngStyle]="{background: reminder.color}">
+      </div>
+      <div class="title">
+        {{reminder.dateTime | dateFormat: 'h:mm a'}}
+      </div>
+      <div class="title">
+        {{reminder.title}}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="day?.reminders?.length > 4" class="overflow reminder">
+    <span>
+      And {{ day?.reminders?.length - 4 }} more
+    </span>
+  </div>
 </div>

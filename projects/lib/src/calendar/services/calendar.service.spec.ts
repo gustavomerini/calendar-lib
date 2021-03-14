@@ -12,7 +12,8 @@ const calculateExpectedDates = (startDate: Date, expectedIndex: number, isOtherM
       date: new Date(startDate),
       isToday: startDate.toLocaleDateString() === new Date().toLocaleDateString(),
       isWeekend: daysOfWeek[startDate.getDay()] === 'Saturday' || daysOfWeek[startDate.getDay()] === 'Sunday',
-      isOtherMonth
+      isOtherMonth,
+      reminders: []
     }
     expectedDates = [...expectedDates, day];
     startDate.setDate(startDate.getDate() +1);

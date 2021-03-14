@@ -22,8 +22,8 @@ describe('ReminderService', () => {
     const reminder: Reminder = {
       city: 'Test',
       color: '#2478D4',
-      hour: '25:00:00',
-      date: new Date(),
+      dateTime: '25:00:00',
+      date: new Date().toLocaleString(),
       forecast: '02d',
       id: new Date().toLocaleDateString(),
       title: 'Test!'
@@ -36,8 +36,8 @@ describe('ReminderService', () => {
     const reminder: Reminder = {
       city: 'New York',
       color: '#2478D4',
-      hour: '13:00:00',
-      date: new Date(),
+      dateTime: '13:00:00',
+      date: new Date().toLocaleString(),
       forecast: '02d',
       id: new Date().toLocaleDateString(),
       title: 'Party!'
@@ -52,8 +52,8 @@ describe('ReminderService', () => {
     const reminder: Reminder = {
       city: 'New York',
       color: '#2478D4',
-      hour: '13:00:00',
-      date: new Date(),
+      dateTime: '13:00:00',
+      date: new Date().toLocaleString(),
       forecast: '02d',
       id: new Date().toLocaleDateString(),
       title: 'Party!'
@@ -61,8 +61,8 @@ describe('ReminderService', () => {
     const otherReminder: Reminder = {
       city: 'New York',
       color: '#2478D4',
-      hour: '13:00:00',
-      date: new Date(),
+      dateTime: '13:00:00',
+      date: new Date().toLocaleString(),
       forecast: '02d',
       id: new Date().toLocaleDateString(),
       title: 'Party!'

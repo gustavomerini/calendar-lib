@@ -28,6 +28,7 @@ export class CalendarService {
         isToday: startDate.toLocaleDateString() === new Date().toLocaleDateString(),
         isWeekend: daysOfWeek[startDate.getDay()] === 'Saturday' || daysOfWeek[startDate.getDay()] === 'Sunday',
         isOtherMonth,
+        reminders: []
       }
       days = [...days, day];
       startDate.setDate(startDate.getDate() + 1);
