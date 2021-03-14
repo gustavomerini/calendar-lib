@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarDay } from './shared/types/calendar-day';
 import { CalendarService } from './services/calendar.service';
 import { daysOfWeek, monthNames } from './shared/utils';
+import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
+import { ReminderService } from './services/reminder.sevice';
+import { Reminder } from './shared/types/reminder';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'calendar-lib',
@@ -12,16 +16,41 @@ export class CalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = [];
   public today: Date = new Date('2021-05-02');
-  public clickedDate: Date = new Date();
+  public selectedDay: CalendarDay = { id: '', date: new Date() };
   public month: string = '';
   public daysOfWeek = daysOfWeek;
   private monthNames = monthNames;
 
-  constructor(private calendarService: CalendarService) { }
+  constructor(private calendarService: CalendarService, private reminderService: ReminderService, public dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.calendar = this.calendarService.getCalendar(this.today);
     this.month = this.monthNames[this.calendar[10].date.getMonth()];
+  }
+
+  public onSelectDay(day: CalendarDay) {
+    if (day.id === this.selectedDay.id) {
+      this.onCreateReminder(day);
+      return;
+    }
+    this.selectedDay.isActive = false;
+    this.selectedDay = day;
+    day.isActive = true;
+  }
+
+  public onCreateReminder(day: CalendarDay) {
+    const dialogRef = this.dialog.open(ReminderModalComponent, {
+      maxWidth: "400px",
+      data: {
+        day
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((reminder: Reminder) => {
+      if (reminder) {
+        this.reminderService.addReminder(reminder);
+      }
+    });
   }
 
 }

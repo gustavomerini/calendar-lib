@@ -4,4 +4,5 @@ export interface CalendarDay {
   isWeekend?: boolean;
   isToday?: boolean;
   isOtherMonth?: boolean;
+  isActive?: boolean;
 }

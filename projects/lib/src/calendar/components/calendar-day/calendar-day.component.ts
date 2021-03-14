@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CalendarDay } from '../../shared/types/calendar-day';
 
 @Component({
@@ -8,6 +8,7 @@ import { CalendarDay } from '../../shared/types/calendar-day';
 })
 export class CalendarDayComponent implements OnInit {
   @Input() day: CalendarDay = { id: '', date: new Date()};
+  @Output() onSelectDay = new EventEmitter();
 
   constructor() { }
 

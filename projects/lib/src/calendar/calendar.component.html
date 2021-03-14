@@ -5,7 +5,10 @@
       <span class="title">Calendar</span>
     </mat-toolbar>
   </div>
-  <div class="sidenav"> sidenav</div>
+  <div class="sidenav">
+    <button mat-flat-button color="primary" (click)="onCreateReminder(selectedDay)"> Add
+      Event </button>
+  </div>
   <div class="toolbar">
     <mat-toolbar>
       <div class="current-date">
@@ -22,8 +25,9 @@
       </span>
     </div>
     <div class="calendar-days">
-      <div class="calendar-day" *ngFor="let day of calendar">
-        <app-calendar-day [day]="day">
+      <div class="calendar-day" *ngFor="let day of calendar"
+        [ngClass]="{clicked: day.isActive, 'other-month': day.isOtherMonth, grey: day.isWeekend}">
+        <app-calendar-day [day]="day" (onSelectDay)="onSelectDay($event)">
         </app-calendar-day>
       </div>
     </div>
