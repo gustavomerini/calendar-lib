@@ -53,13 +53,21 @@
         height: 60px;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        & .forecast {
-          height: 20px;
-          width: 20px;
+        & .top {
+          margin-left: 10px;
+          display: flex;
+          justify-content: space-between;
+          & .forecast {
+            height: 20px;
+            width: 20px;
+          }
         }
         & .title {
           margin-left: 10px;
           font-weight: 700;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
         }
         & .city {
           margin-left: 10px;
@@ -79,6 +87,12 @@
       display: grid;
       justify-items: center;
       grid-template-columns: repeat(7, 12em);
+      background: #3F51B5;
+      span {
+        color: white;
+        border: 3px solid #3F51B5;
+        background-color: #3F51B5;
+      }
     }
     &-day {
       cursor: pointer;

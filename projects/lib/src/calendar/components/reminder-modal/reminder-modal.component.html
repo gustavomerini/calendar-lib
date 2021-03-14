@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <h1 mat-dialog-title>{{ data.edit ? 'Edit reminver' : 'Create reminder'}}</h1>
   <form [formGroup]="reminderForm">
     <mat-form-field appearance="fill">
       <div class="circle" matSuffix (click)="toggleColors()" [ngStyle]="{'background': backgroundColor}"></div>
