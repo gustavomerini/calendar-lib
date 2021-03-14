@@ -12,6 +12,7 @@ export class CalendarComponent implements OnInit {
 
   public calendar: CalendarDay[] = [];
   public today: Date = new Date('2021-05-02');
+  public clickedDate: Date = new Date();
   public month: string = '';
   public daysOfWeek = daysOfWeek;
   private monthNames = monthNames;

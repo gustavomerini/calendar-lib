@@ -1,16 +1,31 @@
-<div class="calendar">
-  <div class="calendar-month">
-    <span>
-      {{month}}
-    </span>
+<div class="wrapper">
+  <div class="nav">
+    <mat-toolbar color="primary">
+      <mat-icon>event</mat-icon>
+      <span class="title">Calendar</span>
+    </mat-toolbar>
   </div>
-  <div class="calendar-day-title">
-    <span *ngFor="let d of daysOfWeek">
-      {{d}}
-    </span>
+  <div class="sidenav"> sidenav</div>
+  <div class="toolbar">
+    <mat-toolbar>
+      <div class="current-date">
+        <span>
+          {{month}} {{today.getFullYear()}}
+        </span>
+      </div>
+    </mat-toolbar>
   </div>
-  <div class="calendar-days">
-    <app-calendar-day *ngFor="let day of calendar" [day]="day">
-    </app-calendar-day>
+  <div class="calendar">
+    <div class="calendar-title">
+      <span *ngFor="let d of daysOfWeek">
+        {{d}}
+      </span>
+    </div>
+    <div class="calendar-days">
+      <div class="calendar-day" *ngFor="let day of calendar">
+        <app-calendar-day [day]="day">
+        </app-calendar-day>
+      </div>
+    </div>
   </div>
 </div>
