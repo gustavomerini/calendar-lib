@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ForecastService } from '../../services/forecast.service';
 import { CalendarDay } from '../../../shared/types/calendar-day';
 import { Reminder } from '../../../shared/types/reminder';
-
+import { v4 as uuidv4 } from 'uuid';
 export interface DialogData {
   day: CalendarDay;
   reminder: Reminder;
@@ -68,7 +68,7 @@ export class ReminderModalComponent implements OnInit {
       ...formValue,
       dateTime: formValue.dateTime,
       date: formValue.dateTime.toLocaleDateString(),
-      id: formValue.dateTime.toLocaleString()
+      id: uuidv4()
     }
     this.forecastService.forecast(reminder.city, reminder.dateTime).subscribe((response) => {
       reminder.forecast = response.weather;

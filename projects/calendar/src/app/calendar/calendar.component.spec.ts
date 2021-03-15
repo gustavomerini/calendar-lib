@@ -88,22 +88,6 @@ describe('CalendarComponent', () => {
     })
   });
 
-  // it('should call onCreateReminder and create reminder', () => {
-  //   const reminder: Reminder = {
-  //     city: 'Indaial',
-  //     color: '#2478D4',
-  //     dateTime: new Date(),
-  //     date: new Date().toLocaleString(),
-  //     forecast: '02d',
-  //     id: new Date().toLocaleDateString(),
-  //     title: 'Party!'
-  //   };
-  //   spyOn(component, 'openReminderModal').and.returnValue(of(reminder))
-  //   component.onCreateReminder(component.calendar[5]);
-  //   const reminders: any = component.calendar[5].reminders;
-  //   expect(reminders[0]).toEqual(reminder);
-  // })
-
   it('should call onCreateReminder null reminder', () => {
     spyOn(component, 'openReminderModal').and.returnValue(of(null))
     component.onCreateReminder(component.calendar[5]);

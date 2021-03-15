@@ -7,6 +7,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { Reminder } from '../../../shared/types/reminder';
 import { of } from 'rxjs';
 import { ReminderModalComponent } from './reminder-modal.component';
+import { v4 as uuidv4 } from 'uuid';
 
 describe('ReminderModalComponent', () => {
   let component: ReminderModalComponent;
@@ -89,10 +90,9 @@ describe('ReminderModalComponent', () => {
       id: ''
     }
     reminder.date = reminder.dateTime.toLocaleDateString();
-    reminder.id =  reminder.dateTime.toLocaleString();
     spyOn((component as any).forecastService,  'forecast').and.callFake(() => of({weather: '02d', description: 'clouds'}))
     component.reminderForm.patchValue(reminder);
     component.onCreate();
-    expect(component.dialogRef.close).toHaveBeenCalledWith(reminder);
+    expect(component.dialogRef.close).toHaveBeenCalled();
   });    
 });

@@ -1,6 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { Reminder } from "../../shared/types/reminder";
 import { ReminderService } from "./reminder.sevice";
+import { v4 as uuidv4 } from 'uuid';
 
 describe('ReminderService', () => {
   let service: ReminderService;
@@ -25,7 +26,7 @@ describe('ReminderService', () => {
       dateTime: new Date(),
       date: new Date().toLocaleString(),
       forecast: '02d',
-      id: new Date().toLocaleDateString(),
+      id: uuidv4(),
       title: 'Test!'
     }
     service.addReminder(reminder);
@@ -39,7 +40,7 @@ describe('ReminderService', () => {
       dateTime: new Date(),
       date: new Date().toLocaleString(),
       forecast: '02d',
-      id: new Date().toLocaleDateString(),
+      id: uuidv4(),
       title: 'Party!'
     }
     service.addReminder(reminder);
@@ -55,7 +56,7 @@ describe('ReminderService', () => {
       dateTime: new Date(),
       date: new Date().toLocaleString(),
       forecast: '02d',
-      id: new Date().toLocaleDateString(),
+      id: uuidv4(),
       title: 'Party!'
     };
     service.addReminder(oldReminder);
@@ -65,7 +66,7 @@ describe('ReminderService', () => {
       dateTime: new Date(),
       date: new Date().toLocaleString(),
       forecast: '02d',
-      id: new Date().toLocaleDateString(),
+      id: uuidv4(),
       title: 'Party!'
     };
     service.editReminder(oldReminder, reminder);
@@ -79,7 +80,7 @@ describe('ReminderService', () => {
       dateTime: new Date(),
       date: new Date().toLocaleString(),
       forecast: '02d',
-      id: new Date().toLocaleDateString(),
+      id: uuidv4(),
       title: 'Party!'
     }
     const otherReminder: Reminder = {
@@ -88,7 +89,7 @@ describe('ReminderService', () => {
       dateTime: new Date(),
       date: new Date().toLocaleString(),
       forecast: '02d',
-      id: new Date().toLocaleDateString(),
+      id: uuidv4(),
       title: 'Party!'
     }
     service.addReminder(reminder);
