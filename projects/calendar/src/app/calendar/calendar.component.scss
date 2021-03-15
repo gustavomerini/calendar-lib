@@ -94,13 +94,13 @@
     height: 100%;
     width: 100%;
     max-height: 100%;
-    overflow: hidden;
     margin-bottom: 10px;
+    overflow: hidden;
     &-title {
       display: grid;
       justify-items: center;
-      grid-template-columns: repeat(7, 23vh);
-      background: #3f51b5;
+      background-color: #3f51b5;
+      grid-template-columns: repeat(7, 11.7vw);
       span {
         color: white;
         border: 3px solid #3f51b5;
@@ -122,7 +122,7 @@
     }
     &-days {
       display: grid;
-      grid-template-columns: repeat(7, 23vh);
+      grid-template-columns: repeat(7, 11.7vw);
     }
   }
 }
