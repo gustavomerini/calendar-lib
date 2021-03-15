@@ -12,7 +12,6 @@ export class ReminderService {
   public addReminder(reminder: Reminder) {
     this.reminders = [...this.reminders, reminder];
     this.remindersChange.next(this.reminders);
-    console.log(this.reminders);
   }
 
   public editReminder(reminder: Reminder) {

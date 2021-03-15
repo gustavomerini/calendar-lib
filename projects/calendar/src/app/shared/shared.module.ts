@@ -11,10 +11,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatDatetimepickerModule, MatNativeDatetimeModule } from "@mat-datetimepicker/core";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { ColorPickerComponent } from './components/color-picker.component';
 import { CommonModule } from '@angular/common';
 import { MomentPipe } from './pipes/moment-pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 
 @NgModule({
   imports: [
@@ -50,9 +51,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatetimepickerModule,
     MatTooltipModule,
     ColorPickerComponent,
+    ConfirmationDialogComponent,
     MomentPipe
   ],
-  declarations: [ColorPickerComponent, MomentPipe],
+  declarations: [ColorPickerComponent, ConfirmationDialogComponent, MomentPipe],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-US' },],
 })
 export class SharedModule { }

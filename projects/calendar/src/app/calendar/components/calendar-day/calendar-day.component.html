@@ -1,7 +1,7 @@
 <div class="day" (click)="onSelectDay.emit(day)">
   <div class="top">
     <div class="header">{{day.date.getDate()}}</div>
-    <img *ngIf="day?.reminders[0]?.forecast" class="forecast"
+    <img [matTooltip]="day?.reminders[0]?.forecastDesc || ''" *ngIf="day?.reminders[0]?.forecast" class="forecast"
       [src]="'assets/icons/' + day?.reminders[0]?.forecast + '.png'" />
   </div>
   <div class="reminder" *ngFor="let reminder of day.reminders?.slice(0, 4)"

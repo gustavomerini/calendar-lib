@@ -15,13 +15,18 @@
       <span>
         {{selectedDay.date | dateFormat: 'dddd, MMMM Do'}}
       </span>
-      <div class="reminder" *ngFor="let r of selectedDay.reminders" [ngStyle]="{'border-left': '8px solid' + r.color}" (click)="onEditReminder({reminder: r, event: $event})">
+      <div class="reminder" *ngFor="let r of selectedDay.reminders" [ngStyle]="{'border-left': '8px solid' + r.color}"
+        (click)="onEditReminder({reminder: r, event: $event})">
         <div class="top">
           <span class="time">{{r.dateTime | dateFormat: 'h:mm a'}}</span>
-          <img *ngIf="r.forecast" class="forecast" [src]="'assets/icons/' + r.forecast + '.png'" />
+          <img [matTooltip]="r.forecastDesc || ''" *ngIf="r.forecast" class="forecast"
+            [src]="'assets/icons/' + r.forecast + '.png'" />
         </div>
-        <span class="title" [matTooltip]="r.title">{{r.title}}</span>
-        <span class="city">{{r.city}}</span>
+        <span class="title">{{r.title}}</span>
+        <div class="bottom">
+          <span class="city">{{r.city}}</span>
+          <mat-icon (click)="deleteReminder(r, $event)">delete_outline</mat-icon>
+        </div>
       </div>
     </div>
   </div>

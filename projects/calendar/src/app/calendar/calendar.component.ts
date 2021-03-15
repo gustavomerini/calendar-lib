@@ -7,6 +7,7 @@ import { ReminderService } from './services/reminder.sevice';
 import { Reminder } from '../shared/types/reminder';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'calendar-lib',
@@ -38,6 +39,7 @@ export class CalendarComponent implements OnInit {
 
   public generateTestCalendar() {
     this.reminders = testReminders;
+    this.reminderService.reminders = this.reminders;
   }
 
   public onSelectDay(day: CalendarDay) {
@@ -88,12 +90,29 @@ export class CalendarComponent implements OnInit {
     return dialogRef.afterClosed();
   }
 
+  public deleteReminder(reminder: Reminder, event: any) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: "400px",
+      data: {
+        reminderTitle: reminder.title
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult: boolean) => {
+      if (dialogResult) {
+        this.mapDeleteReminder(reminder);
+        this.reminderService.removeReminder(reminder.id);
+      }
+    });
+  }
+
   public deleteAllReminders() {
     this.mapDeleteReminders();
     this.reminderService.removeAllReminders();
   }
 
-  chosenMonthHandler(date: any, datepicker: MatDatepicker<Date>) {
+  public chosenMonthHandler(date: any, datepicker: MatDatepicker<Date>) {
     this.startDate = date;
     this.calendar = this.calendarService.getCalendar(this.startDate);
     this.mapReminders();
@@ -117,6 +136,13 @@ export class CalendarComponent implements OnInit {
       if (!day) return;
       day.reminders = [];
     })
+  }
+
+  private mapDeleteReminder(reminder: Reminder) {
+    this.mapCalendar = this.calendar.reduce((acc, item) => acc.set(item.id, item), new Map());
+    const day: any = this.mapCalendar.get(reminder.date);
+    if (!day) return;
+    day.reminders = [...day.reminders, reminder].sort((a, b) => sortByDateAdc(a.dateTime, b.dateTime)).filter(r => r.id !== reminder.id);
   }
 
   private mapAddReminder(reminder: Reminder) {

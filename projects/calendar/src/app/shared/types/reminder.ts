@@ -5,5 +5,6 @@ export interface Reminder {
   city: string;
   dateTime: Date;
   date: string;
-  forecast?: string,
+  forecastDesc?: string;
+  forecast?: string;
 }

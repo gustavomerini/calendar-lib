@@ -72,6 +72,7 @@ export class ReminderModalComponent implements OnInit {
     }
     this.forecastService.forecast(reminder.city, reminder.dateTime).subscribe((response) => {
       reminder.forecast = response.weather;
+      reminder.forecastDesc = response.description;
       this.dialogRef.close(reminder);
     },
       err => {

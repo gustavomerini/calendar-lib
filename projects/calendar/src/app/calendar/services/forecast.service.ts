@@ -21,7 +21,8 @@ export class ForecastService {
       })
       .pipe(
         map((response) => ({
-          weather: response.weather[0].icon
+          weather: response.weather[0].icon,
+          description: response.weather[0].description
         }))
       );
   }
