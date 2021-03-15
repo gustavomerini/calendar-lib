@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ForecastService } from '../../services/forecast.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { Reminder } from '../../../shared/types/reminder';
-
+import { of } from 'rxjs';
 import { ReminderModalComponent } from './reminder-modal.component';
 
 describe('ReminderModalComponent', () => {
@@ -79,14 +79,17 @@ describe('ReminderModalComponent', () => {
 
   it('should create reminder', () => {
     const reminder: Reminder = {
-      id: '1',
       city: 'test',
       color: 'test',
-      date: '1',
       forecast: '02d',
       dateTime: new Date(),
-      title: 'party'
+      title: 'party',
+      date: '',
+      id: ''
     }
+    reminder.date = reminder.dateTime.toLocaleDateString();
+    reminder.id =  reminder.dateTime.toLocaleString();
+    spyOn((component as any).forecastService,  'forecast').and.callFake(() => of({weather: '02d'}))
     component.reminderForm.patchValue(reminder);
     component.onCreate();
     expect(component.dialogRef.close).toHaveBeenCalledWith(reminder);

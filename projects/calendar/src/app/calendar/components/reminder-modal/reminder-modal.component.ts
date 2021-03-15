@@ -42,7 +42,12 @@ export class ReminderModalComponent implements OnInit {
       city: ['', [Validators.required]],
       color: ['#3F51B5'],
     });
-    this.data.edit ? this.reminderForm.patchValue(this.data.reminder) : this.reminderForm.patchValue({ ...this.data.day, dateTime: this.data.day.date });
+    if (this.data.edit) {
+      this.reminderForm.patchValue(this.data.reminder) 
+      this.setColor(this.data.reminder.color)
+      return;
+    }
+    this.reminderForm.patchValue({ ...this.data.day, dateTime: this.data.day.date });
   }
 
   public setColor(color: string) {

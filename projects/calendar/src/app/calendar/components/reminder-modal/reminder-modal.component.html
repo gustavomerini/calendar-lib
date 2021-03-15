@@ -1,14 +1,16 @@
 <div class="wrapper">
   <h1 mat-dialog-title>{{ data.edit ? 'Edit reminver' : 'Create reminder'}}</h1>
   <form [formGroup]="reminderForm">
-    <mat-form-field appearance="fill">
-      <div class="circle" matSuffix (click)="toggleColors()" [ngStyle]="{'background': backgroundColor}"></div>
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title">
-      <mat-error *ngIf="reminderForm.controls.title.errors?.maxlength">Max length is 30 characters</mat-error>
-      <mat-error *ngIf="reminderForm.controls.title.errors?.required">Title is required</mat-error>
-    </mat-form-field>
-    <app-color-picker *ngIf="show" [color]="backgroundColor" (event)="setColor($event)"></app-color-picker>
+    <div class="color-wrapper">
+      <app-color-picker *ngIf="show" [color]="backgroundColor" (event)="setColor($event)"></app-color-picker>
+      <mat-form-field appearance="fill">
+        <div class="circle" matSuffix (click)="toggleColors()" [ngStyle]="{'background': backgroundColor}"></div>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+        <mat-error *ngIf="reminderForm.controls.title.errors?.maxlength">Max length is 30 characters</mat-error>
+        <mat-error *ngIf="reminderForm.controls.title.errors?.required">Title is required</mat-error>
+      </mat-form-field>
+    </div>
     <mat-form-field appearance="fill">
       <mat-label>Date and Time</mat-label>
       <mat-datetimepicker-toggle [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>

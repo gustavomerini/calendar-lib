@@ -48,39 +48,39 @@ export class CalendarComponent implements OnInit {
   public onEditReminder(response: any) {
     response.event.stopPropagation();
     const reminder = response.reminder;
-    const dialogRef = this.dialog.open(ReminderModalComponent, {
-      maxWidth: "550px",
-      data: {
-        edit: true,
-        reminder
-      }
-    });
+    this.openReminderModal(reminder, 'reminder', true).subscribe((newReminder: Reminder) => this.handleEditedReminder(reminder, newReminder));
+  }
 
-    dialogRef.afterClosed().subscribe((editedReminder: Reminder) => {
-      if (!editedReminder) return;
-      if (editedReminder.id !== reminder.id) {
-        const day: any = this.mapCalendar.get(reminder.date);
-        day.reminders = day.reminders.filter((d: any) => d.id !== reminder.id);
-      }
-      this.reminderService.editReminder(editedReminder);
-      this.mapEditReminder(editedReminder);
-    });
+  private handleEditedReminder(oldReminder: Reminder, newReminder: Reminder) {
+    if (!newReminder) return;
+    if (newReminder.id !== oldReminder.id) {
+      const day: any = this.mapCalendar.get(oldReminder.date);
+      day.reminders = day.reminders.filter((d: any) => d.id !== oldReminder.id);
+    }
+    this.reminderService.editReminder(newReminder);
+    this.mapEditReminder(newReminder);
   }
 
   public onCreateReminder(day: CalendarDay) {
+    this.openReminderModal(day, 'day').subscribe((data) => this.handleCreatedReminder(data));
+  }
+
+  public handleCreatedReminder(reminder: Reminder) {
+    if (reminder) {
+      this.reminderService.addReminder(reminder);
+      this.mapAddReminder(reminder);
+    }
+  }
+  public openReminderModal(data: CalendarDay | Reminder, propName: string, edit: boolean = false) {
     const dialogRef = this.dialog.open(ReminderModalComponent, {
       maxWidth: "550px",
       data: {
-        day
+        [propName]: data,
+        edit
       }
     });
 
-    dialogRef.afterClosed().subscribe((reminder: Reminder) => {
-      if (reminder) {
-        this.reminderService.addReminder(reminder);
-        this.mapAddReminder(reminder);
-      }
-    });
+    return dialogRef.afterClosed();
   }
 
   public deleteAllReminders() {

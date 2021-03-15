@@ -22,6 +22,7 @@
     display: grid;
     width: 100%;
     align-self: start;
+    background-color: white;
     & .current-date {
       margin-left: 10px;
     }
@@ -37,7 +38,7 @@
     justify-items: center;
     & .actions {
       display: flex;
-      height: 50px;
+      height: 40px;
       margin-top: 10px;
       width: 100%;
       justify-content: space-evenly;
@@ -74,7 +75,7 @@
           font-weight: 300;
         }
         &:hover {
-          background: #f1f1f1;
+          background: rgba(211, 211, 211, 0.336);
           cursor: pointer;
         }
       }

@@ -56,9 +56,21 @@ describe('CalendarComponent', () => {
     component.onSelectDay(day);
     expect(component.selectedDay).toBeTruthy(day);
     expect(day.isActive).toBeTrue();
-    spyOn(component, 'onCreateReminder').and.callFake(() => {});
+    spyOn(component, 'onCreateReminder').and.callFake(() => { });
     component.onSelectDay(day);
     expect(component.onCreateReminder).toHaveBeenCalledOnceWith(day)
+  });
+
+  it('should open edit Reminder Modal', () => {
+    spyOn(component.dialog, 'open').and.callThrough();
+    component.onEditReminder({ reminder: {}, event: { stopPropagation: () => { } } });
+    expect(component.dialog.open).toHaveBeenCalledOnceWith(ReminderModalComponent, {
+      maxWidth: "550px",
+      data: {
+        reminder: {},
+        edit: true
+      }
+    })
   });
 
   it('should open add Reminder Modal', () => {
@@ -66,10 +78,11 @@ describe('CalendarComponent', () => {
     spyOn(component.dialog, 'open').and.callThrough();
     component.onCreateReminder(component.selectedDay);
     expect(component.dialog.open).toHaveBeenCalledOnceWith(ReminderModalComponent, {
-      maxWidth: "400px",
+      maxWidth: "550px",
       data: {
-        day: component.selectedDay
+        day: component.selectedDay,
+        edit: false
       }
     })
-  });  
+  });
 });
