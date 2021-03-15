@@ -13,17 +13,13 @@ export class ColorPickerComponent {
     '#5e35b1',
     '#e53935',
     '#1e88e5',
-    '#00acc1',
-    '#b7d5c4',
+    '#212121',
+    '#1b5e20',
   ];
 
   constructor() {
   }
 
-  /**
-   * Change color from default colors
-   * @param {string} color
-   */
   public changeColor(color: string): void {
     this.color = color;
     this.event.emit(this.color);

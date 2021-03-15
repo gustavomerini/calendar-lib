@@ -1,7 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { CalendarDay } from '../shared/types/calendar-day';
 import { CalendarService } from './services/calendar.service';
-import { daysOfWeek, monthNames, sortByDateAdc } from '../shared/utils';
+import { daysOfWeek, monthNames, sortByDateAdc, testReminders } from '../shared/utils';
 import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
 import { ReminderService } from './services/reminder.sevice';
 import { Reminder } from '../shared/types/reminder';
@@ -32,7 +32,12 @@ export class CalendarComponent implements OnInit {
     this.reminderService.remindersChange.subscribe((reminders) => {
       this.reminders = reminders;
     })
+    this.generateTestCalendar();
     this.mapReminders();
+  }
+
+  public generateTestCalendar() {
+    this.reminders = testReminders;
   }
 
   public onSelectDay(day: CalendarDay) {

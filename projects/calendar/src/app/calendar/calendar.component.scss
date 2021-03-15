@@ -68,7 +68,8 @@
           font-weight: 700;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 200px;
+          white-space: nowrap;
+          max-width: 245px;
         }
         & .city {
           margin-left: 10px;
