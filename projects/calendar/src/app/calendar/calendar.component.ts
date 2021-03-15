@@ -64,7 +64,7 @@ export class CalendarComponent implements OnInit {
       const day: any = this.mapCalendar.get(oldReminder.date);
       day.reminders = day.reminders.filter((d: any) => d.id !== oldReminder.id);
     }
-    this.reminderService.editReminder(newReminder);
+    this.reminderService.editReminder(oldReminder, newReminder);
     this.mapEditReminder(newReminder);
   }
 

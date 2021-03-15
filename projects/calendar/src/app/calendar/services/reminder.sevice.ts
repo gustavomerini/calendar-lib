@@ -14,8 +14,8 @@ export class ReminderService {
     this.remindersChange.next(this.reminders);
   }
 
-  public editReminder(reminder: Reminder) {
-    this.reminders = this.reminders.filter(r => r.id !== reminder.id);
+  public editReminder(oldReminder: Reminder, reminder: Reminder) {
+    this.reminders = this.reminders.filter(r => r.id !== oldReminder.id);
     this.reminders = [...this.reminders, reminder];
     this.remindersChange.next(this.reminders);
   }
