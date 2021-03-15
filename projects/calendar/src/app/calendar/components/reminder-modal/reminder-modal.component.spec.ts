@@ -84,12 +84,13 @@ describe('ReminderModalComponent', () => {
       forecast: '02d',
       dateTime: new Date(),
       title: 'party',
+      forecastDesc: 'clouds',
       date: '',
       id: ''
     }
     reminder.date = reminder.dateTime.toLocaleDateString();
     reminder.id =  reminder.dateTime.toLocaleString();
-    spyOn((component as any).forecastService,  'forecast').and.callFake(() => of({weather: '02d'}))
+    spyOn((component as any).forecastService,  'forecast').and.callFake(() => of({weather: '02d', description: 'clouds'}))
     component.reminderForm.patchValue(reminder);
     component.onCreate();
     expect(component.dialogRef.close).toHaveBeenCalledWith(reminder);
