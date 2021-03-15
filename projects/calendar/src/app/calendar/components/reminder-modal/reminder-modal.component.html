@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <h1 mat-dialog-title>{{ data.edit ? 'Edit reminver' : 'Create reminder'}}</h1>
+  <h1 mat-dialog-title>{{ data.edit ? 'Edit reminder' : 'Create reminder'}}</h1>
   <form [formGroup]="reminderForm">
     <div class="color-wrapper">
       <app-color-picker *ngIf="show" [color]="backgroundColor" (event)="setColor($event)"></app-color-picker>

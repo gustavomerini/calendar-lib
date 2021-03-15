@@ -108,8 +108,18 @@ export class CalendarComponent implements OnInit {
   }
 
   public deleteAllReminders() {
-    this.mapDeleteReminders();
-    this.reminderService.removeAllReminders();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: "400px",
+      data: {
+        reminderTitle: 'all reminders'
+      }
+    });
+    dialogRef.afterClosed().subscribe((dialogResult: boolean) => {
+      if (dialogResult) {
+        this.mapDeleteReminders();
+        this.reminderService.removeAllReminders();
+      }
+    });
   }
 
   public chosenMonthHandler(date: any, datepicker: MatDatepicker<Date>) {

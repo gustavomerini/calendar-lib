@@ -1,6 +1,11 @@
+.small-calendar {
+  height: 16.2vh;
+}
+.big-calendar {
+  height: 13.5vh;
+}
 .day {
   position: relative;
-  height: 8.2em;
   background-color: transparent;
   border: 1px solid #edebe9;
   & .top {
@@ -42,7 +47,8 @@
         border-radius: 100%;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
       }
-      & .title, .date {
+      & .title,
+      .date {
         margin-left: 5px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -53,22 +59,26 @@
   }
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1550px) {
   .day {
-    height: 9em;
+    .reminder {
+      font-size: 12px;
+    }
   }
-  
-  .date {
-    width: 70px;
+
+  .title {
+    font-size: 10px;
+  }
+  .small-calendar {
+    height: 15.6vh !important;
+  }
+  .big-calendar {
+    height: 12.9vh !important;
   }
 }
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-height: 768px) {
   .day {
-    height: 11.5em;
-  }
-  
-  .date {
-    width: 70px;
+    height: 150px;
   }
 }
