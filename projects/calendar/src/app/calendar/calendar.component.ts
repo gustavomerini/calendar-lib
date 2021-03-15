@@ -58,7 +58,7 @@ export class CalendarComponent implements OnInit {
     this.openReminderModal(reminder, 'reminder', true).subscribe((newReminder: Reminder) => this.handleEditedReminder(reminder, newReminder));
   }
 
-  private handleEditedReminder(oldReminder: Reminder, newReminder: Reminder) {
+  public handleEditedReminder(oldReminder: Reminder, newReminder: Reminder) {
     if (!newReminder) return;
     if (newReminder.id !== oldReminder.id) {
       const day: any = this.mapCalendar.get(oldReminder.date);
@@ -78,6 +78,7 @@ export class CalendarComponent implements OnInit {
       this.mapAddReminder(reminder);
     }
   }
+
   public openReminderModal(data: CalendarDay | Reminder, propName: string, edit: boolean = false) {
     const dialogRef = this.dialog.open(ReminderModalComponent, {
       maxWidth: "550px",
@@ -90,36 +91,38 @@ export class CalendarComponent implements OnInit {
     return dialogRef.afterClosed();
   }
 
-  public deleteReminder(reminder: Reminder, event: any) {
-    event.stopPropagation();
+  public openConfirmationModal(title: string) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       maxWidth: "400px",
       data: {
-        reminderTitle: reminder.title
+        reminderTitle: title
       }
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult: boolean) => {
-      if (dialogResult) {
-        this.mapDeleteReminder(reminder);
-        this.reminderService.removeReminder(reminder.id);
-      }
-    });
+    return dialogRef.afterClosed();
   }
 
+  public deleteReminder(reminder: Reminder, event: any) {
+    event.stopPropagation();
+    this.openConfirmationModal(reminder.title).subscribe((dialogResult) => this.handleDeletedReminder(reminder, dialogResult));
+  }
+
+  private handleDeletedReminder(reminder: Reminder, dialogResult: boolean) {
+    if (dialogResult) {
+      this.mapDeleteReminder(reminder);
+      this.reminderService.removeReminder(reminder.id);
+    }
+  }
+
+  private handleAllDeletedReminder(dialogResult: boolean) {
+    if (dialogResult) {
+      this.mapDeleteReminders();
+      this.reminderService.removeAllReminders();
+    }
+  }  
+
   public deleteAllReminders() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      maxWidth: "400px",
-      data: {
-        reminderTitle: 'all reminders'
-      }
-    });
-    dialogRef.afterClosed().subscribe((dialogResult: boolean) => {
-      if (dialogResult) {
-        this.mapDeleteReminders();
-        this.reminderService.removeAllReminders();
-      }
-    });
+    this.openConfirmationModal('all reminders').subscribe((dialogResult) => this.handleAllDeletedReminder(dialogResult));
   }
 
   public chosenMonthHandler(date: any, datepicker: MatDatepicker<Date>) {
@@ -137,7 +140,6 @@ export class CalendarComponent implements OnInit {
       day.reminders = [...day.reminders, reminder].sort((a, b) => sortByDateAdc(a.dateTime, b.dateTime));
     })
   }
-
 
   private mapDeleteReminders() {
     this.mapCalendar = this.calendar.reduce((acc, item) => acc.set(item.id, item), new Map());

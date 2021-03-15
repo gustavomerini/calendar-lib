@@ -48,6 +48,30 @@ describe('ReminderService', () => {
     expect(service.reminders).toEqual([]);
   });
 
+  it('should editReminder Reminder', () => {
+    const oldReminder: Reminder = {
+      city: 'New York',
+      color: '#2478D4',
+      dateTime: new Date(),
+      date: new Date().toLocaleString(),
+      forecast: '02d',
+      id: new Date().toLocaleDateString(),
+      title: 'Party!'
+    };
+    service.addReminder(oldReminder);
+    const reminder: Reminder = {
+      city: 'Indaial',
+      color: '#2478D4',
+      dateTime: new Date(),
+      date: new Date().toLocaleString(),
+      forecast: '02d',
+      id: new Date().toLocaleDateString(),
+      title: 'Party!'
+    };
+    service.editReminder(oldReminder, reminder);
+    expect(service.reminders).toEqual([reminder]);
+  });  
+
   it('should remove all reminders', () => {
     const reminder: Reminder = {
       city: 'New York',

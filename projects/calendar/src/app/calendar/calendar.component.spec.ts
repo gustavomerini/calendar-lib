@@ -7,6 +7,8 @@ import { CalendarDayComponent } from './components/calendar-day/calendar-day.com
 import { ReminderModalComponent } from './components/reminder-modal/reminder-modal.component';
 import { CalendarService } from './services/calendar.service';
 import { SharedModule } from '../shared/shared.module';
+import { Reminder } from '../shared/types/reminder';
+import { of } from 'rxjs';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -37,6 +39,7 @@ describe('CalendarComponent', () => {
     fixture = TestBed.createComponent(CalendarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.generateTestCalendar();
   });
 
   it('should create', () => {
@@ -84,4 +87,39 @@ describe('CalendarComponent', () => {
       }
     })
   });
+
+  // it('should call onCreateReminder and create reminder', () => {
+  //   const reminder: Reminder = {
+  //     city: 'Indaial',
+  //     color: '#2478D4',
+  //     dateTime: new Date(),
+  //     date: new Date().toLocaleString(),
+  //     forecast: '02d',
+  //     id: new Date().toLocaleDateString(),
+  //     title: 'Party!'
+  //   };
+  //   spyOn(component, 'openReminderModal').and.returnValue(of(reminder))
+  //   component.onCreateReminder(component.calendar[5]);
+  //   const reminders: any = component.calendar[5].reminders;
+  //   expect(reminders[0]).toEqual(reminder);
+  // })
+
+  it('should call onCreateReminder null reminder', () => {
+    spyOn(component, 'openReminderModal').and.returnValue(of(null))
+    component.onCreateReminder(component.calendar[5]);
+    expect(component.calendar[5].reminders?.length).toBe(0);
+  })
+
+  it('should deleteAllReminders', () => {
+    spyOn(component, 'openConfirmationModal').and.returnValue(of(true))
+    component.deleteAllReminders();
+    expect(component.calendar[8].reminders?.length).toBe(0);
+  })
+
+  it('should deleteReminder', () => {
+    spyOn(component, 'openConfirmationModal').and.returnValue(of(true))
+    const reminders: any = component.calendar[8].reminders;
+    component.deleteReminder(reminders[0], { stopPropagation: () => { } });
+    expect(component.calendar[8].reminders?.length).toBe(4);
+  })
 });

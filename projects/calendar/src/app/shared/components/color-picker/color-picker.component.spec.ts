@@ -22,4 +22,10 @@ describe('ColorPickerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should changeColor', () => {
+    spyOn(component.event, 'emit').and.callThrough();
+    component.changeColor('#f1f1f1');
+    expect(component.event.emit).toBeTruthy();
+  });
 });
