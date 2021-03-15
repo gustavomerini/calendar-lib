@@ -42,7 +42,7 @@
         border-radius: 100%;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
       }
-      & .title {
+      & .title, .date {
         margin-left: 5px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -50,5 +50,25 @@
         max-width: 105px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .day {
+    height: 9em;
+  }
+  
+  .date {
+    width: 70px;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .day {
+    height: 11.5em;
+  }
+  
+  .date {
+    width: 70px;
   }
 }
