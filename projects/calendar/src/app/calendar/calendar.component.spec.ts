@@ -12,6 +12,7 @@ import { of } from 'rxjs';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
+  let calendarService: CalendarService;
   let fixture: ComponentFixture<CalendarComponent>;
   const mockDialogRef = {
     open: jasmine.createSpy('open'),
@@ -72,7 +73,32 @@ describe('CalendarComponent', () => {
         reminder: {},
         edit: true
       }
-    })
+    });
+  });
+
+  it('should onEditReminder', () => {
+    spyOn(component.dialog, 'open').and.callThrough();
+    const reminders: any = component.calendar[8].reminders;
+    spyOn(component, 'openReminderModal').and.returnValue(of({ oldReminder: reminders[0], newReminder: reminders[0] }));
+    spyOn((component as any), 'mapEditReminder').and.callThrough();
+    component.onEditReminder({ reminder: reminders[0], event: { stopPropagation: () => { } } });
+    expect((component as any).mapEditReminder).toHaveBeenCalled();
+  });
+
+  it('should chosenMonthHandler', () => {
+    const mock: any = { close: () => { } };
+    spyOn((component as any), 'mapReminders').and.callThrough();
+    component.chosenMonthHandler(new Date(), mock);
+    expect((component as any).mapReminders).toHaveBeenCalled();
+  });
+
+  it('should onEditReminder - null reminder', () => {
+    spyOn(component.dialog, 'open').and.callThrough();
+    const reminders: any = component.calendar[8].reminders;
+    spyOn(component, 'openReminderModal').and.returnValue(of({ oldReminder: reminders[0], newReminder: null }));
+    spyOn((component as any), 'mapEditReminder').and.callThrough();
+    component.onEditReminder({ reminder: reminders[0], event: { stopPropagation: () => { } } });
+    expect((component as any).mapEditReminder).toHaveBeenCalled();
   });
 
   it('should open add Reminder Modal', () => {

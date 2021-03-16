@@ -35,6 +35,8 @@ export class CalendarComponent implements OnInit {
     })
     this.generateTestCalendar();
     this.mapReminders();
+    const today = this.calendar.filter((day) => day.id === new Date().toLocaleDateString())[0];
+    this.onSelectDay(today);
   }
 
   public generateTestCalendar() {
