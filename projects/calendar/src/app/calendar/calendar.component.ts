@@ -116,20 +116,21 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  private handleAllDeletedReminder(dialogResult: boolean) {
+  private handleAllDeletedReminder(day: CalendarDay, dialogResult: boolean) {
     if (dialogResult) {
-      this.mapDeleteReminders();
-      this.reminderService.removeAllReminders();
+      this.mapDeleteReminders(day);
+      this.reminderService.removeAllReminders(day);
     }
   }  
 
-  public deleteAllReminders() {
-    this.openConfirmationModal('all reminders').subscribe((dialogResult) => this.handleAllDeletedReminder(dialogResult));
+  public deleteAllReminders(day: CalendarDay) {
+    this.openConfirmationModal(`all reminders in ${day.date.toLocaleDateString()}`).subscribe((dialogResult) => this.handleAllDeletedReminder(day, dialogResult));
   }
 
   public chosenMonthHandler(date: any, datepicker: MatDatepicker<Date>) {
     this.startDate = date;
     this.calendar = this.calendarService.getCalendar(this.startDate);
+    this.onSelectDay(this.calendar[0]);
     this.mapReminders();
     datepicker.close();
   }
@@ -143,13 +144,9 @@ export class CalendarComponent implements OnInit {
     })
   }
 
-  private mapDeleteReminders() {
+  private mapDeleteReminders(day: CalendarDay) {
     this.mapCalendar = this.calendar.reduce((acc, item) => acc.set(item.id, item), new Map());
-    this.reminders.forEach(reminder => {
-      const day: any = this.mapCalendar.get(reminder.date);
-      if (!day) return;
-      day.reminders = [];
-    })
+    day.reminders = [];
   }
 
   private mapDeleteReminder(reminder: Reminder) {

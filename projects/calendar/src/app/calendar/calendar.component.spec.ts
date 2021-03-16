@@ -122,7 +122,7 @@ describe('CalendarComponent', () => {
 
   it('should deleteAllReminders', () => {
     spyOn(component, 'openConfirmationModal').and.returnValue(of(true))
-    component.deleteAllReminders();
+    component.deleteAllReminders(component.calendar[8]);
     expect(component.calendar[8].reminders?.length).toBe(0);
   })
 

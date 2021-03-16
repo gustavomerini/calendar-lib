@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CalendarDay } from '../../shared/types/calendar-day';
 import { Reminder } from '../../shared/types/reminder';
 
 @Injectable({ providedIn: 'root' })
@@ -7,7 +8,7 @@ export class ReminderService {
   public reminders: Reminder[] = []
   public remindersChange: Subject<Reminder[]> = new Subject<Reminder[]>();
 
-  constructor() {}
+  constructor() { }
 
   public addReminder(reminder: Reminder) {
     this.reminders = [...this.reminders, reminder];
@@ -25,8 +26,8 @@ export class ReminderService {
     this.remindersChange.next(this.reminders);
   }
 
-  public removeAllReminders() {
-    this.reminders = []
+  public removeAllReminders(day: CalendarDay) {
+    this.reminders = this.reminders.filter(r => day.date.toLocaleDateString() !== r.date);
     this.remindersChange.next(this.reminders);
   }
 

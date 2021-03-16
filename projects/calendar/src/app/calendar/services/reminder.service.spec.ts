@@ -71,14 +71,14 @@ describe('ReminderService', () => {
     };
     service.editReminder(oldReminder, reminder);
     expect(service.reminders).toEqual([reminder]);
-  });  
+  });
 
   it('should remove all reminders', () => {
     const reminder: Reminder = {
       city: 'New York',
       color: '#2478D4',
       dateTime: new Date(),
-      date: new Date().toLocaleString(),
+      date: new Date().toLocaleDateString(),
       forecast: '02d',
       id: uuidv4(),
       title: 'Party!'
@@ -87,7 +87,7 @@ describe('ReminderService', () => {
       city: 'New York',
       color: '#2478D4',
       dateTime: new Date(),
-      date: new Date().toLocaleString(),
+      date: new Date().toLocaleDateString(),
       forecast: '02d',
       id: uuidv4(),
       title: 'Party!'
@@ -95,8 +95,9 @@ describe('ReminderService', () => {
     service.addReminder(reminder);
     service.addReminder(otherReminder);
     expect(service.reminders).toEqual([reminder, otherReminder]);
-    service.removeAllReminders();
+    const mockDay: any = { date: new Date() };
+    service.removeAllReminders(mockDay);
     expect(service.reminders).toEqual([]);
-  });  
+  });
 
 })
